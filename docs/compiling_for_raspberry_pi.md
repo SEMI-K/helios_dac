@@ -13,7 +13,11 @@ libusb-1.0.so by the installed version
 cp /usr/lib/arm-linux-gnueabihf/libusb-1.0.so
 /home/pi/helios_dac/sdk/libusb-1.0.so
 ```
-
+Before compiling, modify HeliosDac.cpp L:134 (Helios::WriteFrame)
+```cpp
+return dev->SendFrame( pps, flags, points, std::min<unsigned long>(numOfPoints, HELIOS_MAX_POINTS));
+```
+Then, compile :
 ```shell
 g++ -Wall -std=c++14 -fPIC -O2 -c HeliosDacAPI.cpp
 g++ -Wall -std=c++14 -fPIC -O2 -c HeliosDac.cpp
